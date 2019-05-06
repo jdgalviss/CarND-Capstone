@@ -17,6 +17,7 @@ msgs = []
 
 dbw_enable = False
 count = 0
+count2 = 0
 
 @sio.on('connect')
 def connect(sid, environ):
@@ -46,20 +47,27 @@ def control(sid, data):
 
 @sio.on('obstacle')
 def obstacle(sid, data):
-    bridge.publish_obstacles(data)
+    pass
+    #bridge.publish_obstacles(data)
 
 @sio.on('lidar')
 def obstacle(sid, data):
-    bridge.publish_lidar(data)
+    pass
+    #bridge.publish_lidar(data)
 
 @sio.on('trafficlights')
 def trafficlights(sid, data):
-    bridge.publish_traffic(data)
+    global count2
+    if(count2 >= 3):
+        count2 = 0
+        bridge.publish_traffic(data)
+    else:
+        count2 += 1
 
 @sio.on('image')
 def image(sid, data):
     global count
-    if(count >= 0):
+    if(count >= 2):
         count = 0
         bridge.publish_camera(data)
     else:
