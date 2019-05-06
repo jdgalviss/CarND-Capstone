@@ -15,7 +15,7 @@ class Controller(object):
         kp = 0.3
         ki = 0.1
         kd = 0.
-        mn = 0.3  # minimum throttle value
+        mn = 0.  # minimum throttle value
         mx = 0.2 # maximum throttle value
         self.throttle_controller = PID(kp, ki, kd, mn, mx)
 
@@ -52,6 +52,7 @@ class Controller(object):
 
         throttle = self.throttle_controller.step(vel_error, sample_time)
         brake = 0
+        
 
         if linear_vel == 0. and current_vel < 0.1:
             throttle = 0
@@ -61,5 +62,5 @@ class Controller(object):
             throttle = 0
             decel = max(vel_error, self.decel_limit)
             brake = abs(decel)*self.vehicle_mass*self.wheel_radius #Torque in N*m
-
+        #print("ref_vel: "+str(linear_vel)+" - throttle: "+str(throttle)+" - brake: " + str(brake))
         return throttle, brake, steering
