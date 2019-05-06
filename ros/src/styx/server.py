@@ -16,6 +16,7 @@ app = Flask(__name__)
 msgs = []
 
 dbw_enable = False
+count = 0
 
 @sio.on('connect')
 def connect(sid, environ):
@@ -57,7 +58,12 @@ def trafficlights(sid, data):
 
 @sio.on('image')
 def image(sid, data):
-    bridge.publish_camera(data)
+    global count
+    if(count >= 0):
+        count = 0
+        bridge.publish_camera(data)
+    else:
+        count += 1
 
 if __name__ == '__main__':
 
