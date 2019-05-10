@@ -107,7 +107,7 @@ class WaypointUpdater(object):
             vel=10*new_vel
             #prev_vel = math.sqrt(2 * MAX_DECEL * dist)    
 
-            if vel < 1.2:
+            if vel < 1:
                  vel = 0.0
 
             #rospy.loginfo("dist {}".format(dist))
