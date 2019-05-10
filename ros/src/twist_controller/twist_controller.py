@@ -54,7 +54,7 @@ class Controller(object):
         brake = 0
         
 
-        if linear_vel == 0. and current_vel < 0.1:
+        if linear_vel == 0 and current_vel < 0.1:
             throttle = 0
             brake = 400
         
@@ -62,5 +62,5 @@ class Controller(object):
             throttle = 0
             decel = max(vel_error, self.decel_limit)
             brake = abs(decel)*self.vehicle_mass*self.wheel_radius #Torque in N*m
-        #print("ref_vel: "+str(linear_vel)+" - throttle: "+str(throttle)+" - brake: " + str(brake))
+        #print("linear_vel: "+str(linear_vel)+"- current_vel: "+ str(current_vel) + " - throttle: "+str(throttle)+" - brake: " + str(brake))
         return throttle, brake, steering
