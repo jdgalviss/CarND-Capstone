@@ -7,6 +7,7 @@ import numpy as np
 from scipy.spatial import KDTree
 import math
 from std_msgs.msg import Int32
+from math import exp
 
 '''
 This node will publish waypoints from the car's current position to some `x` distance ahead.
@@ -98,11 +99,23 @@ class WaypointUpdater(object):
 
             stop_idx = max(self.stopline_wp_idx - closest_idx - 2, 0)
             dist = self.distance(waypoints, i, stop_idx)
+                      
+            x=pow(dist,2) 
+            sigma=8
+            sigma2=2*pow(sigma,2)
+            new_vel= 1-exp(-x/sigma2)
+            vel=10*new_vel
+            #prev_vel = math.sqrt(2 * MAX_DECEL * dist)    
 
-            vel = math.sqrt(2 * MAX_DECEL * dist)
-            if vel < 1.0:
-                vel = 0.0
-            #rospy.loginfo(min(vel, wp.twist.twist.linear.x))
+            if vel < 1.2:
+                 vel = 0.0
+
+            #rospy.loginfo("dist {}".format(dist))
+            #rospy.loginfo("new_vel {}".format(new_vel))
+            #rospy.loginfo("vel {}".format(vel))
+            #rospy.loginfo("prevvel {}".format(prev_vel))
+            #rospy.loginfo("twist {}".format(wp.twist.twist.linear.x))
+            #rospy.loginfo("========================================")
             p.twist.twist.linear.x = min(vel, wp.twist.twist.linear.x)
             temp.append(p)
         
