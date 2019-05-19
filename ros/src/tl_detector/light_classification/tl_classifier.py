@@ -26,7 +26,7 @@ class TLClassifier(object):
         raw_predictions = self.predictor({"inputs": img_array})
         predictions = self.parse_predictions(raw_predictions, threshold)
         # Warning: Assuming that we only infer one frame at a time
-        # assert len(predictions) == 0, "We infered more than one frame."
+        assert len(predictions) == 1, "We infered more than one frame."
         prediction = predictions[0]
         if not prediction:
             return TrafficLight.UNKNOWN
