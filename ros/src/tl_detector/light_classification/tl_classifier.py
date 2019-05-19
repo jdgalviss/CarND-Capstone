@@ -25,12 +25,12 @@ class TLClassifier(object):
         assert len(img_array.shape) == 4, "image should be rank 4, with batch dimmesion on the first dimension"
         raw_predictions = self.predictor({"inputs": img_array})
         predictions = self.parse_predictions(raw_predictions, threshold)
-        traffic_light = 0
-
         # Warning: Assuming that we only infer one frame at a time
         assert len(predictions) == 0, "We infered more than one frame"
         prediction = predictions[0]
         if not prediction:
+            return TrafficLight.UNKNOWN
+        else:
             classes = [x for x, _ in prediction]
             traffic_light = self.most_frequent(classes)
             if traffic_light == 1.0:
@@ -39,8 +39,6 @@ class TLClassifier(object):
                 return TrafficLight.RED
             if traffic_light == 3.0:
                 return TrafficLight.YELLOW
-        else:
-            return TrafficLight.UNKNOWN
 
     @staticmethod
     def parse_predictions(predictions, threshold=0.6):
