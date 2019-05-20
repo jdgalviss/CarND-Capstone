@@ -3,4 +3,5 @@ linux_sys_int
 build
 devel
 
+models/traffic-light/v1
 profile.tmp
