@@ -28,6 +28,12 @@ RUN apt-get install -y ros-$ROS_DISTRO-image-proc
 # socket io
 RUN apt-get install -y netbase
 
+# tfinterface
+RUN pip install git+https://github.com/kiwicampus/tfinterface.git@develop
+RUN pip uninstall --yes tensorflow 
+RUN pip install tensorflow==1.8.0
+
+
 RUN mkdir /capstone
 VOLUME ["/capstone"]
 VOLUME ["/root/.ros/log/"]
