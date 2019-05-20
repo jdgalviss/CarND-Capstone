@@ -2,11 +2,19 @@ from styx_msgs.msg import TrafficLight
 from object_detection import ObjectDetector
 import tfinterface as ti
 import cv2
+import numpy as np
+
 class TLClassifier(object):
     def __init__(self):
         self.model = ObjectDetector("/capstone/models/mobilenetv1.pb")
 
         self.traffic_lights_model = ti.estimator.SavedModelPredictor('/capstone/models/traffic-light/v1')
+
+        test_image = np.random.random((200,200,3))
+        self.model.predict(image=[test_image])
+        self.traffic_lights_model.predict(image=[test_image])
+      
+
 
     def get_classification(self, image):
         """Determines the color of the traffic light in the image
