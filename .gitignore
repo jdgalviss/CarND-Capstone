@@ -2,5 +2,16 @@
 linux_sys_int
 build
 devel
+models/mobilenetv1_real
+models/mobilenetv1_real_2
+models/mobilenetv1
+models/fast_rcnn_resnet50
+models/fast_rcnn
+models/ssd
+models/v2/ssd
+models/v2/faster_rcnn
+models/mobilenetv1_real_3
+
+
 
 profile.tmp
