@@ -22,9 +22,11 @@ Following modules are implemented:
 
 ## Results
 By integrating all these modules, we can make the car follow waypoints on the road's middle lane while stopping in the presence of red lights.
+
 ![alt text][image1]
 
 In order to see how the correct performance of the traffic light classifier, we set the car on manual mode for it to see red, yellow and green lights:
+
 ![alt text][image2]
 
 Video of simulation on this [link](https://www.youtube.com/watch?v=gKV5OUGz5VY).
