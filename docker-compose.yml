@@ -3,7 +3,7 @@ services:
 
   ros-service:
     build: .
-    # runtime: nvidia
+    runtime: nvidia
 
     volumes:
       - ./:/capstone
@@ -14,7 +14,23 @@ services:
 
   capstone:
     build: .
-    # runtime: nvidia
+    runtime: nvidia
+
+    volumes:
+      - ./:/capstone
+      - /tmp/log:/root/.ros/
+      - ./models:/models
+      - ./output:/output
+
+    ports:
+      - 4567:4567
+
+  capstone-gpu:
+    build: 
+      context: .
+      dockerfile: Dockerfile-gpu
+
+    runtime: nvidia
 
     volumes:
       - ./:/capstone
