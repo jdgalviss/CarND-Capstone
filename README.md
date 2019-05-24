@@ -1,3 +1,42 @@
+# Self-driving Car - System Integration
+
+In this project we develop a system which integrates multiple components to drive a car autonomously (drive by wire, waypoint generation, steering and throttle control and traffic light classification). This system is first implemented in simulation and then in a real car (Carla, Udacity's self driving car.)
+
+[//]: # (Image References)
+
+[image1]: ./result_imgs/startup.gif "result"
+[image2]: ./result_imgs/classification.gif "result2"
+
+Following modules are implemented:
+* Traffic light Classification: Using a ssd_mobilenetv1 pretrained model (with the COCO dataset), we took data provided by [Alex lechner's group](https://github.com/alex-lechner/Traffic-Light-Classification) to implement transfer learning and obtain a Deep Neural Network  model to detect and classify traffic light on images from both simulation and Carla (udacity's self driving car). We use 2 models, one for real images and one for simulation images.
+* Control:
+...
+
+...
+
+...
+
+...
+
+
+
+## Results
+By integrating all these modules, we can make the car follow waypoints on the road's middle lane while stopping in the presence of red lights.
+![alt text][image1]
+
+In order to see how the correct performance of the traffic light classifier, we set the car on manual mode for it to see red, yellow and green lights:
+![alt text][image2]
+
+Video of simulation on this [link](https://www.youtube.com/watch?v=gKV5OUGz5VY).
+
+...
+
+...
+
+...
+
+
+
 This is the project repo for the final project of the Udacity Self-Driving Car Nanodegree: Programming a Real Self-Driving Car. For more information about the project, see the project introduction [here](https://classroom.udacity.com/nanodegrees/nd013/parts/6047fe34-d93c-4f50-8336-b70ef10cb4b2/modules/e1a23b06-329a-4684-a717-ad476f0d8dff/lessons/462c933d-9f24-42d3-8bdc-a08a5fc866e4/concepts/5ab4b122-83e6-436d-850f-9f4d26627fd9).
 
 Please use **one** of the two installation options, either native **or** docker installation.
