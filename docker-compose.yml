@@ -1,4 +1,4 @@
-version: '3'
+version: '2.3'
 services:
 
   ros-service:
@@ -35,6 +35,8 @@ services:
     volumes:
       - ./:/capstone
       - /tmp/log:/root/.ros/
+      - ./models:/models
+      - ./output:/output
 
     ports:
       - 4567:4567
