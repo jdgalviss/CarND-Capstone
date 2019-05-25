@@ -1,4 +1,5 @@
 # Self-driving Car - System Integration
+[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
 In this project we develop a system which integrates multiple components to drive a car autonomously (drive by wire, waypoint generation, steering and throttle control and traffic light classification). This system is first implemented in simulation and then in a real car (Carla, Udacity's self driving car.)
 
@@ -8,16 +9,12 @@ In this project we develop a system which integrates multiple components to driv
 [image2]: ./result_imgs/classification.gif "result2"
 
 Following modules are implemented:
-* Traffic light Classification: Using a ssd_mobilenetv1 pretrained model (with the COCO dataset), we took data provided by [Alex lechner's group](https://github.com/alex-lechner/Traffic-Light-Classification) to implement transfer learning and obtain a Deep Neural Network  model to detect and classify traffic light on images from both simulation and Carla (udacity's self driving car). We use 2 models, one for real images and one for simulation images.
-* Control:
-...
-
-...
-
-...
-
-...
-
+#### Traffic light Classification
+Using a ssd_mobilenetv1 pretrained model (with the COCO dataset), we took data provided by [Alex lechner's group](https://github.com/alex-lechner/Traffic-Light-Classification) to implement transfer learning and obtain a Deep Neural Network  model to detect and classify traffic light on images from both simulation and Carla (udacity's self driving car). We use 2 models, one for real images and one for simulation images.
+##### Waypoint updater
+The main goal of this module is to publish a set of waypoints to be followed by the car, we have reduced the number of waypoints in the lane generation to 50 to reduce the computational load. First, the algorithm searches for the closest waypoint to the car and take the next 50 waypoints from the base waypoints. Then, we checked for the stop signal and if it is present, we generate a deceleration waypoint set based on the formula '10-10 exp(-x^2/128)' generating a soft brake behavior. Finally, the final waypoint list is published using a rostopic.
+##### DBW
+The drive-by-wire node implements the controllers needed to move the vehicle to follow the target waypoints. The break and throttle are regulated using a classic PID controller, the reference is the linear velocity taken from the waypoint follower. The throttle control takes into account the sign of the control output to send the corresponding brake value when it is necessary.  The steering control uses the angular and linear velocities from the waypoint follower twist to calculate the corresponding steering angle.
 
 
 ## Results
