@@ -2,15 +2,15 @@
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
 ### Team
-[Juan David Galvis](https://github.com/jdgalviss)
+[Juan David Galvis](https://github.com/jdgalviss) jdgalviss@gmail.com
 
-[David Cardozo](https://github.com/Davidnet)
+[David Cardozo](https://github.com/Davidnet) david@kiwicampus.com
 
-[Carlos Alvarez](https://github.com/charlielito)
+[Carlos Alvarez](https://github.com/charlielito) charlie@kiwicampus.com
 
-[John Betancourt](https://github.com/Johnbetacode)
+[John Betancourt](https://github.com/Johnbetacode) john.betancourt93@gmail.com
 
-[Andres Rengifo](https://github.com/andresR8)
+[Andres Rengifo](https://github.com/andresR8) anferesa239@gmail.com
 
 ## Project Overview
 
