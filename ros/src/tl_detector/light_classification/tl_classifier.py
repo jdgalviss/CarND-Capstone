@@ -6,10 +6,11 @@ import cv2
 from collections import Counter
 from styx_msgs.msg import TrafficLight
 
-MODEL_PATH_REAL = '/models/mobilenetv1_real_2/saved_model'
-MODEL_PATH_SIM = '/models/mobilenetv1_2/saved_model'
+MODEL_PATH_REAL = r'light_classification/models/mobilenetv1_real_2/saved_model'
+MODEL_PATH_SIM = r'light_classification/models/mobilenetv1_2/saved_model'
 class TLClassifier(object):
     def __init__(self, is_sim):
+        self.is_model_ready = False
         if is_sim:
             MODEL_PATH = MODEL_PATH_SIM
             self.fourcc = cv2.VideoWriter_fourcc(*'MPEG')
@@ -21,6 +22,10 @@ class TLClassifier(object):
         assert os.path.isdir(MODEL_PATH), "{} is not a directory".format(MODEL_PATH)
         self.predictor = tf.contrib.predictor.from_saved_model(MODEL_PATH)
         self.is_sim = is_sim
+        print("Testing Traffic light detection model on black image")
+        test_prediction = self.predictor({"inputs": [np.zeros((800,600,3))]})
+        print("Traffic light detection model ready!")
+        self.is_model_ready = True
         
 
 

@@ -24,6 +24,7 @@ class TLDetector(object):
         self.waypoints = None
         self.camera_image = None
         self.lights = []
+        self.light_classifier = TLClassifier(is_sim = True)
 
         sub1 = rospy.Subscriber('/current_pose', PoseStamped, self.pose_cb)
         sub2 = rospy.Subscriber('/base_waypoints', Lane, self.waypoints_cb)
@@ -44,7 +45,6 @@ class TLDetector(object):
         self.upcoming_red_light_pub = rospy.Publisher('/traffic_waypoint', Int32, queue_size=1)
 
         self.bridge = CvBridge()
-        self.light_classifier = TLClassifier(is_sim = True)
         self.listener = tf.TransformListener()
 
         self.state = TrafficLight.UNKNOWN
@@ -130,7 +130,7 @@ class TLDetector(object):
         #Get classification
         tl_state = self.light_classifier.get_classification(cv_image)
         tl_classes = ['RED','YELLOW', 'GREEN', 'UNKNOWN', 'UNKNOWN']
-        print(tl_classes[tl_state])
+        #print(tl_classes[tl_state])
         return tl_state
 
     def process_traffic_lights(self):
@@ -147,7 +147,7 @@ class TLDetector(object):
 
         # List of positions that correspond to the line to stop in front of for a given intersection
         stop_line_positions = self.config['stop_line_positions']
-        if(self.pose):
+        if(self.pose and self.waypoints and self.waypoint_tree):
             car_wp_idx = self.get_closest_waypoint(self.pose.pose.position.x, self.pose.pose.position.y)
 
             # find the closest visible traffic light (if one exists)
@@ -164,7 +164,7 @@ class TLDetector(object):
                     closest_light = light
                     line_wp_idx = temp_wp_idx
                 
-        if closest_light:
+        if closest_light and self.light_classifier.is_model_ready:
         #if True:
             state = self.get_light_state(closest_light)
             return line_wp_idx, state
