@@ -58,7 +58,7 @@ def obstacle(sid, data):
 @sio.on('trafficlights')
 def trafficlights(sid, data):
     global count2
-    if(count2 >= 0):
+    if(count2 >= 4):
         count2 = 0
         bridge.publish_traffic(data)
     else:
@@ -67,7 +67,7 @@ def trafficlights(sid, data):
 @sio.on('image')
 def image(sid, data):
     global count
-    if(count >= 0):
+    if(count >= 3):
         count = 0
         bridge.publish_camera(data)
     else:

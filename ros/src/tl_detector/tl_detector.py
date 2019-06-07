@@ -130,7 +130,7 @@ class TLDetector(object):
         #Get classification
         tl_state = self.light_classifier.get_classification(cv_image)
         tl_classes = ['RED','YELLOW', 'GREEN', 'UNKNOWN', 'UNKNOWN']
-        #print(tl_classes[tl_state])
+        print(tl_classes[tl_state])
         return tl_state
 
     def process_traffic_lights(self):

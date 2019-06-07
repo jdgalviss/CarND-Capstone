@@ -85,7 +85,7 @@ class TLClassifier(object):
                     cv2.line(image, (int(box[3]*height), int(box[0]*width)), (int(box[3]*height), int(box[2]*width)), color, thickness)
                     cv2.line(image, (int(box[1]*height), int(box[2]*width)), (int(box[3]*height), int(box[2]*width)), color, thickness)
                     cv2.putText(image,"Traffic Light is: "+message,(20,100), cv2.FONT_HERSHEY_SIMPLEX, 1.5,color,2,cv2.LINE_AA)
-                    self.out.write(image)
+                    #self.out.write(image)
         # else:
         #     box = detection_boxes[0]
         #     score = detection_scores[0]
