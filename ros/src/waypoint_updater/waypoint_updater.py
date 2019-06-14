@@ -100,14 +100,15 @@ class WaypointUpdater(object):
             stop_idx = max(self.stopline_wp_idx - closest_idx - 2, 0)
             dist = self.distance(waypoints, i, stop_idx)
                       
-            x=pow(dist,2) 
-            sigma=8
-            sigma2=2*pow(sigma,2)
-            new_vel= 1-exp(-x/sigma2)
-            vel=10*new_vel
+            # x=pow(dist,2) 
+            # sigma=8
+            # sigma2=2*pow(sigma,2)
+            # new_vel= 1-exp(-x/sigma2)
+            # vel=10*new_vel
+            vel = math.sqrt(2 * MAX_DECEL * dist)
             #prev_vel = math.sqrt(2 * MAX_DECEL * dist)    
 
-            if vel < 1:
+            if vel < 1.0:
                  vel = 0.0
 
             #rospy.loginfo("dist {}".format(dist))

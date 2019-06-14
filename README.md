@@ -23,7 +23,7 @@ In this project we develop a system which integrates multiple components to driv
 
 Following modules are implemented:
 #### Traffic light Classification
-Using a ssd_mobilenetv1 pretrained model (with the COCO dataset), we took data provided by [Alex lechner's group](https://github.com/alex-lechner/Traffic-Light-Classification) to implement transfer learning and obtain a Deep Neural Network  model to detect and classify traffic light on images from both simulation and Carla (udacity's self driving car). We use 2 models, one for real images and one for simulation images.
+Using a ssd_mobilenetv1 pretrained model (with the COCO dataset), we took data provided by [Alex lechner's group](https://github.com/alex-lechner/Traffic-Light-Classification) to implement transfer learning and obtain a Deep Neural Network  model to detect and classify traffic light on images from both simulation and Carla (udacity's self driving car). We use 2 models, one for real images and one for simulation images They should be switched in the file catkin_ws/src/tl_detector/tl_detector.py line 27.
 #### Waypoint Updater
 The main goal of this module is to publish a set of waypoints to be followed by the car, we have reduced the number of waypoints in the lane generation to 50 to reduce the computational load. First, the algorithm searches for the closest waypoint to the car and take the next 50 waypoints from the base waypoints. Then, we checked for the stop signal and if it is present, we generate a deceleration waypoint set based on the formula '10-10 exp(-x^2/128)' generating a soft brake behavior. Finally, the final waypoint list is published using a rostopic.
 #### DBW
